@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{531EFC49-9FAB-4D4B-940B-837649D10DA4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MethodAggregate</RootNamespace>
+    <AssemblyName>MethodAggregate</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Newegg.API.Client">
+      <HintPath>..\packages\Newegg_RestAPIClient.1.1.0\lib\Newegg.API.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Newegg.Framework.Tools, Version=1.0.1.0, Culture=neutral, PublicKeyToken=525ea4427d10936d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newegg_FrameworkTools.1.0.1\lib\Newegg.Framework.Tools.dll</HintPath>
+    </Reference>
+    <Reference Include="Newegg.FrameworkAPI.SDK, Version=1.2.2.0, Culture=neutral, PublicKeyToken=525ea4427d10936d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newegg_FrameworkAPISDK.1.2.2\lib\Newegg.FrameworkAPI.SDK.dll</HintPath>
+    </Reference>
+    <Reference Include="Newegg.OZZO.WMS.Infrastructure.Common, Version=1.15.0.507, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Newegg.OZZO.WMS.Infrastructure.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text, Version=3.8.3.0, Culture=neutral, PublicKeyToken=525ea4427d10936d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newegg_RestAPIClient.1.1.0\lib\ServiceStack.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity.Design" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Helper\RunnerCacheManager.cs" />
+    <Compile Include="InnerRunners\InnerRunner.cs" />
+    <Compile Include="InnerRunners\NormalRunner.cs" />
+    <Compile Include="InnerRunners\RetryRunner.cs" />
+    <Compile Include="InnerRunners\CachedRetryRunner.cs" />
+    <Compile Include="Helper\RunnerMailSender.cs" />
+    <Compile Include="Models\CacheEntity.cs" />
+    <Compile Include="Models\CacheProcessOption.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RunnerOptions\MailOption.cs" />
+    <Compile Include="Runner.cs" />
+    <Compile Include="RunnerOptions\RetryOption.cs" />
+    <Compile Include="RunnerOptions\RunnerOption.cs" />
+    <Compile Include="RunnerOptions\RunnerOptionBase.cs" />
+    <Compile Include="RunnerEmit.cs" />
+    <Compile Include="UnitTest\Action_Runner_Test.cs" />
+    <Compile Include="UnitTest\CacheHelper_Test.cs" />
+    <Compile Include="UnitTest\Func_Runner_Test.cs" />
+    <Compile Include="UnitTest\LocalCacheRetryRunner_Test.cs" />
+    <Compile Include="UnitTest\Newegg_FrameworkLogger_Test.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ClassLibrary1\ClassLibrary1.csproj">
+      <Project>{850812ec-fdda-431b-9114-a0f261b5aa07}</Project>
+      <Name>ClassLibrary1</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Diagram\Readme.md" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Diagram\Runner-InnerRunnerProxy-NoneRetryRunner Sequence.png" />
+    <Content Include="Diagram\Runner.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

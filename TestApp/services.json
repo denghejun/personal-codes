@@ -1,0 +1,18 @@
+﻿{
+"defaultAssembly": "TestApp",
+"components": [
+		{
+		"type": "App",
+		"services": [{"type":"IApp"}],
+		"injectProperties": true
+		}
+	],
+	"modules":[
+		{
+		"type": "ModuleA.ModuleIdentify, ModuleA",
+		},
+		{
+		"type": "ModuleB.ModuleIdentif, ModuleB"
+		}
+	]
+}
